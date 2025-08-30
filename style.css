@@ -1,9 +1,8 @@
 /* Reset and base styles */
 body {
-  background-color: #000;
+  background-color: black;
   color: #00ff00;
-  font-family: 'Courier New', Courier, monospace;
-  margin: 0;
+  font-family: 'Courier New', monospace;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -17,11 +16,11 @@ body {
   color: #00ff00;
   width: 90%;
   max-width: 600px;
-  margin: 1.8rem 0;     /* More vertical spacing */
-  padding: 1.1rem;       /* Slightly more internal padding */
+  margin: 2rem 0;
+  padding: 1.5rem;
   text-align: center;
-  font-size: 1.1em;       /* Slightly larger text */
-  line-height: 1.6em;     /* More readable spacing */
+  font-size: 1.1em;
+  line-height: 1.6em;
   box-shadow: 0 0 10px #00ff00;
 }
 
@@ -58,9 +57,7 @@ a:hover {
 }
 
 .footer {
-  position: fixed;
-  bottom: 1rem;
-  width: 100%;
+  margin-top: 3rem;
   text-align: center;
   font-size: 0.85em;
   color: #00ff00;
