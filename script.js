@@ -1,57 +1,34 @@
-const textEl = document.getElementById('text');
-const bootEl = document.getElementById('boot');
 const canvas = document.getElementById('matrixCanvas');
-const contentEl = document.getElementById('content');
+const ctx = canvas.getContext('2d');
 
-const bootText = 
-  "Authenticating NFC tag...\n" +
-  "Identity confirmed: MICHAEL\n" +
-  "System Online";
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
 
-let i = 0;
+// Binary characters only
+const letters = '01';
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = Array(Math.floor(columns)).fill(1);
 
-function type() {
-  if (i < bootText.length) {
-    textEl.textContent += bootText[i];
-    i++;
-    setTimeout(type, 75);
-  } else {
-    setTimeout(() => {
-      bootEl.style.display = 'none';
-      canvas.style.display = 'block';
-      startMatrix();
+function draw() {
+  // Trail fade effect — darker and slower
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      setTimeout(() => {
-        contentEl.style.display = 'block';
-      }, 1500);
-    }, 1000);
-  }
-}
+  // Dimmed green characters
+  ctx.fillStyle = 'rgba(0, 255, 0, 0.3)';
+  ctx.font = `${fontSize}px monospace`;
 
-function startMatrix() {
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  for (let i = 0; i < drops.length; i++) {
+    const text = letters.charAt(Math.floor(Math.random() * letters.length));
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-  const chars = 'アァイィウヴエカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const fontSize = 14;
-  const columns = canvas.width / fontSize;
-  const drops = Array(Math.floor(columns)).fill(1);
-
-  function draw() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#0F0';
-    ctx.font = fontSize + 'px monospace';
-
-    for (let i = 0; i < drops.length; i++) {
-      const text = chars[Math.floor(Math.random() * chars.length)];
-      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-      drops[i] = drops[i] * fontSize > canvas.height || Math.random() > 0.975 ? 0 : drops[i] + 1;
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+      drops[i] = 0;
     }
-  }
 
-  setInterval(draw, 50);
+    drops[i]++;
+  }
 }
 
-type();
+setInterval(draw, 50);
