@@ -18,18 +18,18 @@ body {
   flex-direction: column;
 }
 
-@media (max-width: 600px) {
-  #boot {
-    font-size: 1.5em;
-  }
-}
-
 .cursor {
   animation: blink 1s step-end infinite;
 }
 
 @keyframes blink {
   50% { opacity: 0; }
+}
+
+@media (max-width: 600px) {
+  #boot {
+    font-size: 1.5em;
+  }
 }
 
 #matrixCanvas {
@@ -42,11 +42,40 @@ body {
   z-index: -1;
 }
 
-#stats {
+#content {
   display: none;
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  font-size: 1.5em;
-  line-height: 2em;
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  text-align: center;
+  animation: fadeIn 2s ease forwards;
+  opacity: 0;
+}
+
+.badge {
+  border: 2px solid #00ffcc;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+
+ul {
+  list-style-type: square;
+  padding-left: 1.2rem;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+.footer {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
