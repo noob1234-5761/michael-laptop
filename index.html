@@ -10,7 +10,7 @@
       background-color: black;
       color: #00ff00;
       font-family: 'Courier New', monospace;
-      font-size: 1.2em;
+      font-size: 1.1em;
       white-space: pre-wrap;
       overflow: hidden;
     }
@@ -22,6 +22,7 @@
       height: 100vh;
       text-align: center;
       flex-direction: column;
+      padding: 1rem;
     }
 
     .cursor {
@@ -47,6 +48,28 @@
       padding: 2rem;
       animation: fadeIn 2s ease forwards;
       opacity: 0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .box {
+      border: 2px solid #00ff00;
+      padding: 1rem;
+      margin: 1rem 0;
+      background-color: #000;
+    }
+
+    ul {
+      list-style-type: square;
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #00ff00;
+      text-align: center;
     }
 
     @keyframes fadeIn {
@@ -64,23 +87,35 @@
   <canvas id="matrixCanvas"></canvas>
 
   <div id="content">
-MICHAEL-LAPTOP
-Legacy Machine Reimagined
+    <div class="box">
+      <h2>MICHAEL-LAPTOP</h2>
+      <p>Legacy Machine Reimagined</p>
+    </div>
 
-Model: Acer Aspire E15 Start ES1-512-C2FA
-Build ID: MOD-XQ47
-Origin: Nonno's Laptop
-Purpose: Personal Artifact
+    <div class="box">
+      <p><strong>Model:</strong> Acer Aspire E15 Start ES1-512-C2FA</p>
+      <p><strong>Build ID:</strong> MOD-XQ47</p>
+      <p><strong>Origin:</strong> Nonno's Laptop</p>
+      <p><strong>Purpose:</strong> Personal Artifact</p>
+    </div>
 
-Completed Mods:
-- Installed new SSD
-- Upgraded to 8GB RAM
+    <div class="box">
+      <p><strong>Completed Mods:</strong></p>
+      <ul>
+        <li>Installed new SSD</li>
+        <li>Upgraded to 8GB RAM</li>
+      </ul>
+    </div>
 
-Planned Mods:
-- Internal Disk Drive Upgrade
-- Custom-molded bezel enhancement
+    <div class="box">
+      <p><strong>Planned Mods:</strong></p>
+      <ul>
+        <li>Internal Disk Drive Upgrade</li>
+        <li>Custom-molded bezel enhancement</li>
+      </ul>
+    </div>
 
-© 2025 Michael | NFC Identity Plate
+    <div class="footer">© 2025 Michael | NFC Identity Plate</div>
   </div>
 
   <script>
