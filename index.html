@@ -1,49 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MICHAEL-LAPTOP</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>System Boot</title>
+  <style>
+    body {
+      background-color: black;
+      color: lime;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.2em;
+      padding: 20px;
+    }
+    #console {
+      white-space: pre-wrap;
+    }
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background-color: lime;
+      animation: blink 1s step-start infinite;
+    }
+    @keyframes blink {
+      50% { background-color: transparent; }
+    }
+  </style>
 </head>
 <body>
-  <div id="boot">
-    <span id="text"></span><span class="cursor">|</span>
-  </div>
+  <div id="console"></div><span class="cursor"></span>
 
-  <canvas id="matrixCanvas"></canvas>
+  <script>
+    const bootText = 
+      "Authenticating NFC tag...\n" +
+      "Identity confirmed: MICHAEL\n" +
+      "System Online";
 
-  <div id="content">
-    <h1>MICHAEL-LAPTOP</h1>
-    <p>Legacy Machine Reimagined</p>
+    const consoleElement = document.getElementById("console");
+    let index = 0;
 
-    <div class="badge">
-      <p><strong>Model:</strong> Acer Aspire E15 Start ES1-512-C2FA</p>
-      <p><strong>Build ID:</strong> MOD-XQ47</p>
-      <p><strong>Origin:</strong> Nonno's Laptop</p>
-      <p><strong>Purpose:</strong> Personal Artifact</p>
-    </div>
+    function type() {
+      if (index < bootText.length) {
+        consoleElement.textContent += bootText[index];
+        index++;
+        setTimeout(type, 50); // Adjust typing speed here
+      }
+    }
 
-    <div class="badge">
-      <p><strong>Completed Mods:</strong></p>
-      <ul>
-        <li>Installed new SSD</li>
-        <li>Upgraded to 8GB RAM</li>
-      </ul>
-    </div>
-
-    <div class="badge">
-      <p><strong>Planned Mods:</strong></p>
-      <ul>
-        <li>Internal Disk Drive Upgrade</li>
-        <li>Custom-molded bezel enhancement</li>
-      </ul>
-    </div>
-
-    <div class="footer">© 2025 Michael | NFC Identity Plate</div>
-  </div>
-
-  <script src="script.js"></script>
+    type();
+  </script>
 </body>
 </html>
-
