@@ -1,55 +1,50 @@
-// Matrix rain
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
+const textEl = document.getElementById('text');
+const bootEl = document.getElementById('boot');
+const canvas = document.getElementById('matrixCanvas');
+const statsEl = document.getElementById('stats');
 
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
+const bootText = "Initializing system...\nSystem Online";
+let i = 0;
 
-const letters = "01";
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = Array(Math.floor(columns)).fill(1);
-
-function draw() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = "#00ff00";
-  ctx.font = fontSize + "px monospace";
-
-  for (let i = 0; i < drops.length; i++) {
-    const text = letters[Math.floor(Math.random() * letters.length)];
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-      drops[i] = 0;
-    }
-
-    drops[i]++;
+function type() {
+  if (i < bootText.length) {
+    textEl.textContent += bootText[i];
+    i++;
+    setTimeout(type, 100);
+  } else {
+    setTimeout(() => {
+      bootEl.style.display = 'none';
+      canvas.style.display = 'block';
+      statsEl.style.display = 'block';
+      startMatrix();
+    }, 1000);
   }
 }
 
-setInterval(draw, 33);
+function startMatrix() {
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-// Boot messages
-const messages = [
-  "INITIALIZING...",
-  "MOD-XQ47: BIOS CHECK PASSED",
-  "AUTHENTICATING NFC...",
-  "LOADING MODULES...",
-  "SYSTEM ONLINE"
-];
+  const chars = 'アァイィウヴエカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
 
-messages.forEach((msg, i) => {
-  setTimeout(() => {
-    const line = document.getElementById(`boot-line-${i + 1}`);
-    line.textContent = msg;
-    line.style.opacity = 1;
-  }, i * 1000);
-});
+  function draw() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#0F0';
+    ctx.font = fontSize + 'px monospace';
 
-// Fade out boot screen and fade in content
-setTimeout(() => {
-  document.querySelector(".boot-screen").style.animation = "fadeOut 2s ease forwards";
-  document.querySelector(".content").style.animation = "fadeIn 2s ease forwards";
-}, messages.length * 1000 + 500);
+    for (let i = 0; i < drops.length; i++) {
+      const text = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      drops[i] = drops[i] * fontSize > canvas.height || Math.random() > 0.975 ? 0 : drops[i] + 1;
+    }
+  }
+
+  setInterval(draw, 50);
+}
+
+type();
