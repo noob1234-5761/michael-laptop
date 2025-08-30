@@ -17,7 +17,7 @@ body {
   color: #00ff00;
   width: 90%;
   max-width: 600px;
-  margin: 0.5rem 0;
+  margin: 1.2rem 0;   /* Increased from 0.5rem */
   padding: 0.9rem;
   text-align: center;
   font-size: 1.05em;
