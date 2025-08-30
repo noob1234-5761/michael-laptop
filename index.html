@@ -1,51 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>System Boot</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MICHAEL-LAPTOP Boot Sequence</title>
   <style>
     body {
-      background-color: black;
+      margin: 0;
+      background: black;
       color: lime;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 1.2em;
-      padding: 20px;
+      font-family: monospace;
+      overflow: hidden;
     }
-    #console {
-      white-space: pre-wrap;
+
+    #boot {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: lime;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      z-index: 3;
     }
-    .cursor {
-      display: inline-block;
-      width: 10px;
-      background-color: lime;
-      animation: blink 1s step-start infinite;
+
+    canvas {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
     }
-    @keyframes blink {
-      50% { background-color: transparent; }
+
+    #content {
+      display: none;
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      text-align: center;
+      animation: fadeIn 2s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
-  <div id="console"></div><span class="cursor"></span>
+  <div id="boot">System Online...</div>
+  <canvas id="matrix"></canvas>
+  <div id="content">
+    <h1>MICHAEL-LAPTOP</h1>
+    <p>Welcome to your custom boot screen.</p>
+  </div>
 
   <script>
-    const bootText = 
-      "Authenticating NFC tag...\n" +
-      "Identity confirmed: MICHAEL\n" +
-      "System Online";
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    const bootEl = document.getElementById('boot');
+    const contentEl = document.getElementById('content');
 
-    const consoleElement = document.getElementById("console");
-    let index = 0;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    function type() {
-      if (index < bootText.length) {
-        consoleElement.textContent += bootText[index];
-        index++;
-        setTimeout(type, 50); // Adjust typing speed here
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0F0';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
       }
     }
 
-    type();
+    function startMatrix() {
+      setInterval(drawMatrix, 50);
+    }
+
+    setTimeout(() => {
+      bootEl.style.display = 'none';
+      canvas.style.display = 'block';
+      startMatrix();
+
+      setTimeout(() => {
+        contentEl.style.display = 'block';
+      }, 1500);
+    }, 1000);
   </script>
 </body>
 </html>
