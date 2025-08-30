@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  background: black;
+  color: #00ff00;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.boot-screen {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  z-index: 10;
+}
+
+.boot-line {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  color: white;
+  font-family: sans-serif;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
