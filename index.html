@@ -3,192 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MICHAEL-LAPTOP</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #000;
-      color: #00ffcc;
-      font-family: 'Courier New', monospace;
-      overflow: hidden;
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-
-    .boot-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #000;
-      color: #00ff00;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.5rem;
-      flex-direction: column;
-      z-index: 999;
-      animation: fadeOut 4s ease forwards;
-      animation-delay: 3s;
-    }
-
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-
-    .content {
-      position: relative;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 1;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 4s;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      text-align: center;
-    }
-
-    p {
-      font-size: 1.2rem;
-      margin: 0.5rem 0;
-      text-align: center;
-    }
-
-    .badge, .roadmap {
-      border: 2px solid #00ffcc;
-      padding: 1rem;
-      border-radius: 8px;
-      background-color: #1a1a1a;
-      width: 100%;
-      max-width: 600px;
-      margin-top: 1rem;
-    }
-
-    ul {
-      list-style-type: square;
-      padding-left: 1.2rem;
-      margin-top: 0.5rem;
-    }
-
-    .footer {
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      color: #666;
-      text-align: center;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      p {
-        font-size: 1rem;
-      }
-
-      .badge, .roadmap {
-        padding: 0.8rem;
-      }
-
-      ul {
-        padding-left: 1rem;
-      }
-    }
-  </style>
+  <title>Project Nexus Boot</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <canvas id="matrix"></canvas>
 
   <div class="boot-screen">
-    <div>INITIALIZING...</div>
-    <div>LOADING MODULES...</div>
-    <div>ONLINE</div>
+    <div id="boot-line-1" class="boot-line"></div>
+    <div id="boot-line-2" class="boot-line"></div>
+    <div id="boot-line-3" class="boot-line"></div>
+    <div id="boot-line-4" class="boot-line"></div>
+    <div id="boot-line-5" class="boot-line"></div>
   </div>
 
   <div class="content">
-    <h1>MICHAEL-LAPTOP</h1>
-    <p>Legacy Machine Reimagined</p>
-
-    <div class="badge">
-      <p><strong>Model:</strong> Acer Aspire E15 Start ES1-512-C2FA</p>
-      <p><strong>Build ID:</strong> MOD-XQ47</p>
-      <p><strong>Origin:</strong> Nonno's Laptop</p>
-      <p><strong>Purpose:</strong> Personal Artifact</p>
-    </div>
-
-    <div class="badge">
-      <p><strong>Completed Mods:</strong></p>
-      <ul class="completed-mods">
-        <li>Installed new SSD</li>
-        <li>Upgraded to 8GB RAM</li>
-      </ul>
-    </div>
-
-    <div class="roadmap">
-      <p><strong>Planned Mods:</strong></p>
-      <ul>
-        <li>Internal Disk Drive Upgrade</li>
-        <li>Custom-molded bezel enhancement</li>
-      </ul>
-    </div>
-
-    <div class="footer">© 2025 Michael | NFC Identity Plate</div>
+    <h1>Welcome to Project Nexus</h1>
+    <p>Everything is operational. Dive in.</p>
   </div>
 
-  <script>
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
-
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-
-    const letters = "01";
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-
-    function draw() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "#00ff00";
-      ctx.font = fontSize + "px monospace";
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-
-        drops[i]++;
-      }
-    }
-
-    setInterval(draw, 33);
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
