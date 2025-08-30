@@ -1,22 +1,29 @@
 const textEl = document.getElementById('text');
 const bootEl = document.getElementById('boot');
 const canvas = document.getElementById('matrixCanvas');
-const statsEl = document.getElementById('stats');
+const contentEl = document.getElementById('content');
 
-const bootText = "Initializing system...\nSystem Online";
+const bootText = 
+  "Authenticating NFC tag...\n" +
+  "Identity confirmed: MICHAEL\n" +
+  "System Online";
+
 let i = 0;
 
 function type() {
   if (i < bootText.length) {
     textEl.textContent += bootText[i];
     i++;
-    setTimeout(type, 100);
+    setTimeout(type, 75);
   } else {
     setTimeout(() => {
       bootEl.style.display = 'none';
       canvas.style.display = 'block';
-      statsEl.style.display = 'block';
       startMatrix();
+
+      setTimeout(() => {
+        contentEl.style.display = 'block';
+      }, 1500);
     }, 1000);
   }
 }
