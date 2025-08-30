@@ -2,24 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Nexus Boot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>System Boot</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="matrix"></canvas>
-
-  <div class="boot-screen">
-    <div id="boot-line-1" class="boot-line"></div>
-    <div id="boot-line-2" class="boot-line"></div>
-    <div id="boot-line-3" class="boot-line"></div>
-    <div id="boot-line-4" class="boot-line"></div>
-    <div id="boot-line-5" class="boot-line"></div>
+  <div id="boot">
+    <span id="text"></span><span class="cursor">|</span>
   </div>
 
-  <div class="content">
-    <h1>Welcome to Project Nexus</h1>
-    <p>Everything is operational. Dive in.</p>
+  <canvas id="matrixCanvas"></canvas>
+
+  <div id="stats">
+    <p>🧠 CPU: 98%</p>
+    <p>💾 RAM: 7.2GB</p>
+    <p>🌐 Network: Stable</p>
+    <p>🔋 Power: Optimal</p>
   </div>
 
   <script src="script.js"></script>
