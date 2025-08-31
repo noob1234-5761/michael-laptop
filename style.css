@@ -54,3 +54,10 @@ a:hover {
   font-size: 0.85em;
   color: #00ff00;
 }
+
+@media (max-width: 600px) {
+  .box {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+}
